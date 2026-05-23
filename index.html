@@ -915,6 +915,12 @@ nav.dark .hamburger span{background:#fff}
   /* SCROLL HINT on mobile */
   .scroll-hint { display: none; }
 
+  /* ── MOBILE NORMAL SCROLL ── */
+  html, body { overflow-y: auto; height: auto; }
+  #slider { position: static; transform: none !important; transition: none; }
+  .slide { overflow: visible; height: auto; min-height: 100vh; }
+  #site-footer { display: flex !important; }
+
   /* Customize section eyebrow fix */
   #customize .cust-left .sec-eyebrow { margin-top: 0; }
 }
@@ -1416,8 +1422,7 @@ for(let i=0;i<TOTAL;i++){
 }
 
 function goToSlide(idx){
-  if(idx<0||idx>=TOTAL||idx===current||isAnimating)return;
-  isAnimating = true;
+  if(idx<0||idx>=TOTAL)return;
   current = idx;
   // Close mobile menu if open
   menuOpen = false;
@@ -1426,6 +1431,14 @@ function goToSlide(idx){
   if(hambEl) hambEl.classList.remove('open');
   if(mobileMenuEl) mobileMenuEl.classList.remove('open');
   updateUI();
+  if(window.innerWidth <= 768){
+    // Na mobile — normálny scroll k sekcii
+    const slides = document.querySelectorAll('.slide');
+    if(slides[idx]) slides[idx].scrollIntoView({ behavior: 'smooth' });
+    return;
+  }
+  if(isAnimating)return;
+  isAnimating = true;
   slider.style.transform = `translateY(${-idx*100}vh)`;
   setTimeout(()=>{ isAnimating=false; }, 950);
 }
