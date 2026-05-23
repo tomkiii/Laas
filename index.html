@@ -225,162 +225,6 @@ nav.dark .nav-cta{background:#C27348!important;color:#fff!important}
   pointer-events: none;
 }
 
-@media (max-width: 768px) {
-  nav {
-    padding: 0 20px;
-  }
-
-  .phil-text p {
-    font-size: 13px;
-    margin-bottom: 14px;
-  }
-
-  .s-plans {
-    overflow-y: auto;
-    overflow-x: hidden;
-    -webkit-overflow-scrolling: touch;
-  }
-
-  .plans-header {
-    padding: 64px 20px 16px;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 6px;
-    flex-shrink: 0;
-  }
-
-  .plans-desc {
-    text-align: left;
-    max-width: 100%;
-    font-size: 12px;
-  }
-
-  .plans-h2 {
-    font-size: clamp(22px, 6vw, 36px);
-  }
-
-  .plans-body {
-    flex-direction: column;
-    flex: 0 0 auto;
-    min-height: 0;
-  }
-
-  .plan-tabs {
-    width: 100%;
-    flex-direction: row;
-    padding: 0;
-    border-right: none;
-    border-bottom: 1px solid #e8e8e8;
-    overflow-x: auto;
-    flex-shrink: 0;
-  }
-
-  .plan-tabs::-webkit-scrollbar {
-    display: none;
-  }
-
-  .ptab {
-    border-left: none;
-    border-bottom: 2px solid transparent;
-    white-space: nowrap;
-    padding: 14px 20px;
-    flex-shrink: 0;
-  }
-
-  .ptab.on {
-    border-left-color: transparent;
-    border-bottom-color: #C27348;
-  }
-
-  .plan-content {
-    flex-direction: column;
-    flex: 0 0 auto;
-  }
-
-  .ppanel {
-    display: none;
-  }
-
-  .ppanel.on {
-    display: block;
-  }
-
-  .plan-img-wrap {
-    width: 100%;
-    height: 160px;
-    flex: none;
-    border-right: none;
-    border-bottom: 1px solid #e8e8e8;
-  }
-
-  .plan-info {
-    width: 100%;
-    padding: 20px 24px 32px;
-    flex-shrink: 0;
-  }
-
-  .plan-area-num {
-    font-size: 44px;
-  }
-
-  .plan-name {
-    font-size: 22px;
-  }
-
-  #slider #pricing h2 {
-    width: 100% !important;
-  }
-
-  #p-panels-track .p-panel {
-    height: auto !important;
-  }
-
-  #p-panels-track .p-card {
-    height: auto !important;
-  }
-
-  #slider #pricing .p-panels-wrap #p-panels-track .p-panel .p-card .p-duration {
-    width: auto !important;
-  }
-
-  #customize .cust-left .sec-eyebrow {
-    margin-top: 0;
-  }
-}
-
-@media (max-width: 480px) {
-  .btn-dark {
-    padding: 13px 24px;
-    font-size: 10px;
-  }
-
-  .plan-img-wrap {
-    height: 160px;
-  }
-
-  #i1lfs {
-    padding-top: 16px;
-    padding-right: 20px;
-    padding-bottom: 16px;
-    padding-left: 20px;
-  }
-
-  #iu657 {
-    margin-top: 0px;
-    margin-right: 0px;
-    margin-bottom: 0px;
-    margin-left: 0px;
-    padding-top: 20px;
-    padding-right: 24px;
-    padding-bottom: 18px;
-    padding-left: 24px;
-  }
-
-  #ijf8t {
-    margin-bottom: 0px;
-  }
-}
-
 /* ── CUSTOMIZE ── */
 .s-customize{background:#f5f3ef;flex-direction:column;justify-content:center;padding:80px 80px}
 .sec-eyebrow{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:#C27348;margin-bottom:18px;font-weight:500}
@@ -744,8 +588,8 @@ nav.dark .hamburger span{background:#fff}
     border-bottom: 1px solid #e8e8e8;
     flex: none;
   }
-  .hero-h1 { font-size: clamp(40px,11vw,64px); letter-spacing:-2px; margin-bottom:28px; }
-  .hero-sub { margin-bottom: 32px; font-size:14px; }
+  .hero-h1 { font-size: clamp(40px,11vw,64px); letter-spacing:-2px; margin-bottom:50px; margin-top: 30px;}
+  .hero-sub { margin-bottom: 28px; font-size:15px; }
   .hero-right {
     width: 100%;
     padding: 24px 24px 32px;
@@ -755,8 +599,8 @@ nav.dark .hamburger span{background:#fff}
     display: grid;
     grid-template-columns: 1fr 1fr;
   }
-  .stat-item { border-top: 1px solid #ddd; padding: 16px 0; }
-  .stat-item:first-child { border-top: 1px solid #ddd; padding-top: 16px; }
+  .stat-item { border-top: 0 solid #ddd; padding: 16px 0; }
+  .stat-item:first-child { border-top: 0 solid #ddd; padding-top: 16px; }
   .stat-n { font-size: 38px; }
 
   /* ── PHILOSOPHY ── */
@@ -911,6 +755,7 @@ nav.dark .hamburger span{background:#fff}
   }
   .f-links { margin-left: 0; gap: 16px; }
   .f-copy { margin-left: 0; width: 100%; }
+  
 
   /* SCROLL HINT on mobile */
   .scroll-hint { display: none; }
@@ -919,15 +764,14 @@ nav.dark .hamburger span{background:#fff}
   html, body { overflow-y: auto; height: auto; }
   #slider { position: static; transform: none !important; transition: none; }
   .slide { overflow: visible; height: auto; min-height: 100vh; }
-  #site-footer { display: flex !important; }
 
   /* Customize section eyebrow fix */
   #customize .cust-left .sec-eyebrow { margin-top: 0; }
 }
 
 @media (max-width: 480px) {
-  .hero-h1 { font-size: clamp(34px, 10vw, 52px); }
-  .hero-eyebrow { margin-bottom: 20px; }
+  .hero-h1 { font-size: clamp(54px, 10vw, 72px); }
+  .hero-eyebrow { margin-bottom: 20px; font-size: 10px}
   .btn-dark { padding: 13px 24px; font-size: 10px; }
   .phil-h2 { font-size: clamp(24px, 8vw, 40px); }
   .plan-img-wrap { height: 160px; }
