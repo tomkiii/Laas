@@ -2,12 +2,12 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>LaaS - Living as a Service</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
-html,body{height:100%;overflow:hidden;font-family:'Inter',sans-serif;background:#fff;color:#111;overscroll-behavior:none;-webkit-overflow-scrolling:touch}
+html,body{height:100%;overflow:hidden;font-family:'Inter',sans-serif;background:#fff;color:#111}
 
 /* ── WRAPPER ── */
 #slider{
@@ -16,7 +16,7 @@ html,body{height:100%;overflow:hidden;font-family:'Inter',sans-serif;background:
   will-change:transform;
 }
 .slide{
-  width:100%;height:100vh;height:100dvh;
+  width:100%;height:100vh;
   display:flex;
   position:relative;
   overflow:hidden;
@@ -223,6 +223,162 @@ nav.dark .nav-cta{background:#C27348!important;color:#fff!important}
   background: rgba(248,247,245,0.85);
   padding: 3px 10px;
   pointer-events: none;
+}
+
+@media (max-width: 768px) {
+  nav {
+    padding: 0 20px;
+  }
+
+  .phil-text p {
+    font-size: 13px;
+    margin-bottom: 14px;
+  }
+
+  .s-plans {
+    overflow-y: auto;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .plans-header {
+    padding: 64px 20px 16px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+    flex-shrink: 0;
+  }
+
+  .plans-desc {
+    text-align: left;
+    max-width: 100%;
+    font-size: 12px;
+  }
+
+  .plans-h2 {
+    font-size: clamp(22px, 6vw, 36px);
+  }
+
+  .plans-body {
+    flex-direction: column;
+    flex: 0 0 auto;
+    min-height: 0;
+  }
+
+  .plan-tabs {
+    width: 100%;
+    flex-direction: row;
+    padding: 0;
+    border-right: none;
+    border-bottom: 1px solid #e8e8e8;
+    overflow-x: auto;
+    flex-shrink: 0;
+  }
+
+  .plan-tabs::-webkit-scrollbar {
+    display: none;
+  }
+
+  .ptab {
+    border-left: none;
+    border-bottom: 2px solid transparent;
+    white-space: nowrap;
+    padding: 14px 20px;
+    flex-shrink: 0;
+  }
+
+  .ptab.on {
+    border-left-color: transparent;
+    border-bottom-color: #C27348;
+  }
+
+  .plan-content {
+    flex-direction: column;
+    flex: 0 0 auto;
+  }
+
+  .ppanel {
+    display: none;
+  }
+
+  .ppanel.on {
+    display: block;
+  }
+
+  .plan-img-wrap {
+    width: 100%;
+    height: 160px;
+    flex: none;
+    border-right: none;
+    border-bottom: 1px solid #e8e8e8;
+  }
+
+  .plan-info {
+    width: 100%;
+    padding: 20px 24px 32px;
+    flex-shrink: 0;
+  }
+
+  .plan-area-num {
+    font-size: 44px;
+  }
+
+  .plan-name {
+    font-size: 22px;
+  }
+
+  #slider #pricing h2 {
+    width: 100% !important;
+  }
+
+  #p-panels-track .p-panel {
+    height: auto !important;
+  }
+
+  #p-panels-track .p-card {
+    height: auto !important;
+  }
+
+  #slider #pricing .p-panels-wrap #p-panels-track .p-panel .p-card .p-duration {
+    width: auto !important;
+  }
+
+  #customize .cust-left .sec-eyebrow {
+    margin-top: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .btn-dark {
+    padding: 13px 24px;
+    font-size: 10px;
+  }
+
+  .plan-img-wrap {
+    height: 160px;
+  }
+
+  #i1lfs {
+    padding-top: 16px;
+    padding-right: 20px;
+    padding-bottom: 16px;
+    padding-left: 20px;
+  }
+
+  #iu657 {
+    margin-top: 0px;
+    margin-right: 0px;
+    margin-bottom: 0px;
+    margin-left: 0px;
+    padding-top: 20px;
+    padding-right: 24px;
+    padding-bottom: 18px;
+    padding-left: 24px;
+  }
+
+  #ijf8t {
+    margin-bottom: 0px;
+  }
 }
 
 /* ── CUSTOMIZE ── */
@@ -570,46 +726,38 @@ nav.dark .hamburger span{background:#fff}
 ══════════════════════════════ */
 @media (max-width: 768px) {
 
-  /* Faster slide transitions on mobile */
-  #slider { transition: transform 0.55s cubic-bezier(0.77,0,0.18,1); }
-
   /* NAV */
-  nav { padding: 0 20px; height: 48px; }
+  nav { padding: 0 20px; }
   .nav-links { display: none !important; }
   .hamburger { display: flex; }
-  .mobile-menu { display: flex; top: 48px; }
+  .mobile-menu { display: flex; }
 
   /* SIDE DOTS + SECTION NUM */
   #side-progress { display: none; }
   #section-num { left: 16px; bottom: 16px; font-size: 10px; }
 
   /* ── HERO ── */
-  .s-hero { flex-direction: column; overflow-y: auto; -webkit-overflow-scrolling: touch; }
+  .s-hero { flex-direction: column; overflow-y: auto; }
   .hero-left {
-    padding: 68px 22px 28px;
+    padding: 72px 24px 32px;
     border-right: none;
     border-bottom: 1px solid #e8e8e8;
     flex: none;
   }
-  .hero-eyebrow { margin-bottom: 18px; font-size: 9px; }
-  .hero-h1 { font-size: clamp(38px,11vw,62px); letter-spacing:-2px; margin-bottom:24px; }
-  .hero-sub { margin-bottom: 28px; font-size:14px; max-width:100%; }
-  .hero-btns { gap: 10px; }
-  .btn-dark { padding: 15px 26px; font-size: 10px; min-height: 48px; }
+  .hero-h1 { font-size: clamp(40px,11vw,64px); letter-spacing:-2px; margin-bottom:28px; }
+  .hero-sub { margin-bottom: 32px; font-size:14px; }
   .hero-right {
     width: 100%;
-    padding: 20px 22px 28px;
+    padding: 24px 24px 32px;
     flex: none;
   }
   .hero-stats {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 0;
   }
-  .stat-item { border-top: 1px solid #ddd; padding: 14px 0; }
-  .stat-item:first-child { border-top: 1px solid #ddd; padding-top: 14px; }
-  .stat-n { font-size: 36px; }
-  .stat-l { font-size: 9px; }
+  .stat-item { border-top: 1px solid #ddd; padding: 16px 0; }
+  .stat-item:first-child { border-top: 1px solid #ddd; padding-top: 16px; }
+  .stat-n { font-size: 38px; }
 
   /* ── PHILOSOPHY ── */
   .s-phil { flex-direction: column; }
@@ -621,7 +769,6 @@ nav.dark .hamburger span{background:#fff}
     border-bottom: 1px solid #2a2a2a;
     overflow-x: auto;
     flex-shrink: 0;
-    min-height: 0;
   }
   .phil-left::-webkit-scrollbar { display: none; }
   .phil-nav-item {
@@ -630,33 +777,27 @@ nav.dark .hamburger span{background:#fff}
     white-space: nowrap;
     padding: 14px 20px;
     flex-shrink: 0;
-    min-height: 48px;
-    display: flex;
-    align-items: center;
   }
   .phil-right {
-    padding: 24px 22px 32px;
+    padding: 28px 24px;
     overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
     flex: 1;
-    min-height: 0;
   }
-  .phil-h2 { font-size: clamp(26px, 8vw, 44px); margin-bottom:20px; letter-spacing:-1.5px; }
-  .phil-divider { margin-bottom: 20px; }
-  .phil-text p { font-size: 13px; margin-bottom: 14px; line-height: 1.75; }
+  .phil-h2 { font-size: clamp(28px, 8vw, 48px); margin-bottom:24px; }
+  .phil-text p { font-size: 13px; margin-bottom: 14px; }
 
   /* ── FLOOR PLANS ── */
   .s-plans { overflow-y: auto; overflow-x: hidden; -webkit-overflow-scrolling: touch; }
   .plans-header {
-    padding: 60px 20px 14px;
+    padding: 64px 20px 16px;
     flex-direction: column;
     align-items: flex-start;
     gap: 6px;
     flex-shrink: 0;
   }
   .plans-desc { text-align: left; max-width: 100%; font-size:12px; }
-  .plans-h2 { font-size: clamp(22px, 6vw, 34px); }
-  .plans-body { flex-direction: column; flex: 0 0 auto; }
+  .plans-h2 { font-size: clamp(22px, 6vw, 36px); }
+  .plans-body { flex-direction: column; flex: 0 0 auto; min-height: 0; }
   .plan-tabs {
     width: 100%;
     flex-direction: row;
@@ -671,9 +812,8 @@ nav.dark .hamburger span{background:#fff}
     border-left: none;
     border-bottom: 2px solid transparent;
     white-space: nowrap;
-    padding: 14px 18px;
+    padding: 14px 20px;
     flex-shrink: 0;
-    min-height: 48px;
   }
   .ptab.on { border-left-color: transparent; border-bottom-color: #C27348; }
   .plan-content { flex-direction: column; flex: 0 0 auto; }
@@ -681,15 +821,14 @@ nav.dark .hamburger span{background:#fff}
   .ppanel.on { display: block; }
   .plan-img-wrap {
     width: 100%;
-    height: 200px;
+    height: 190px;
     flex: none;
     border-right: none;
     border-bottom: 1px solid #e8e8e8;
   }
-  .plan-info { width: 100%; padding: 20px 22px 36px; flex-shrink: 0; }
+  .plan-info { width: 100%; padding: 20px 24px 32px; flex-shrink: 0; }
   .plan-area-num { font-size: 44px; }
   .plan-name { font-size: 22px; }
-  .plan-feats li { font-size: 13px; }
 
   /* ── CUSTOMIZE ── */
   .s-customize {
@@ -702,48 +841,44 @@ nav.dark .hamburger span{background:#fff}
   }
   .cust-left {
     flex: 0 0 auto !important;
-    padding: 60px 20px 24px;
+    padding: 64px 20px 28px;
     border-right: none;
     border-bottom: 1px solid #e0ddd8;
     overflow-y: visible;
   }
-  .cust-intro { font-size:12px; margin-bottom:20px !important; }
+  .cust-intro { font-size:12px; margin-bottom:24px !important; }
   .cust-right {
     width: 100% !important;
     flex-shrink: 0;
-    padding: 24px 20px 36px;
+    padding: 24px 20px 32px;
   }
-  .cust-opt { min-height: 40px; display: inline-flex; align-items: center; }
-  .cust-categories { gap: 22px; }
+  .cust-preview { gap: 0; }
   #cust-price-num { font-size: 38px; }
 
   /* ── WHY LAAS ── */
   .s-why {
-    padding: 60px 20px 28px;
+    padding: 64px 20px 32px;
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
     flex-direction: column;
     justify-content: flex-start;
     align-items: stretch;
   }
-  .s-why .sec-h2 { margin-bottom: 28px; }
   .why-grid { grid-template-columns: 1fr; }
-  .w-card { padding: 24px 20px; }
-  .w-num { font-size: 36px; }
+  .w-card { padding: 28px 24px; }
 
   /* ── PRICING ── */
   .s-pricing {
-    padding: 60px 20px 24px;
+    padding: 64px 20px 24px;
     overflow-y: auto;
     overflow-x: hidden;
     -webkit-overflow-scrolling: touch;
   }
-  .s-pricing .sec-h2 { margin-bottom: 12px; }
   #slider #pricing h2 { width: 100% !important; }
-  .pricing-sub { font-size: 12px; margin-bottom: 10px; }
+  .pricing-sub { font-size: 12px; margin-bottom: 12px; }
   .p-apt-nav { overflow-x: auto; flex-shrink: 0; }
   .p-apt-nav::-webkit-scrollbar { display: none; }
-  .p-apt-tab { white-space: nowrap; padding: 10px 14px; font-size: 10px; min-height: 44px; }
+  .p-apt-tab { white-space: nowrap; padding: 9px 14px; font-size: 10px; }
   .p-panels-wrap { overflow-x: hidden; overflow-y: visible; flex: 0 0 auto; }
   .p-panels-track { height: auto !important; }
   .p-panel {
@@ -757,58 +892,43 @@ nav.dark .hamburger span{background:#fff}
   #p-panels-track .p-card { height: auto !important; }
   #slider #pricing .p-panels-wrap #p-panels-track .p-panel .p-card .p-duration { width: auto !important; }
   .p-amt { font-size: 34px; }
-  .btn-plan { min-height: 48px; padding: 13px; }
+
 
   /* ── WAITLIST ── */
-  .s-waitlist { padding: 72px 22px 56px; }
-  .wl-h2 { font-size: clamp(30px,9vw,50px); letter-spacing:-1.5px; }
-  .wl-sub { font-size: 13px; margin-bottom: 32px; }
+  .s-waitlist { padding: 80px 24px 60px; }
+  .wl-h2 { font-size: clamp(30px,9vw,52px); letter-spacing:-1.5px; }
+  .wl-sub { font-size: 13px; }
   .wl-form { flex-direction: column; max-width: 100%; }
-  .wl-in {
-    border-right: 1px solid #e8e8e8;
-    border-bottom: none;
-    padding: 15px;
-    font-size: 16px; /* prevents iOS zoom */
-  }
-  .wl-btn { padding: 15px 20px; min-height: 48px; }
+  .wl-in { border-right: 1px solid #e8e8e8; border-bottom: none; }
+  .wl-btn { border-top: none; padding: 14px 20px; }
 
   /* ── FOOTER ── */
   #site-footer {
-    padding: 14px 20px !important;
+    padding: 16px 20px !important;
     flex-wrap: wrap;
-    gap: 8px;
+    gap: 10px;
     height: auto !important;
   }
-  .f-links { margin-left: 0; gap: 14px; }
+  .f-links { margin-left: 0; gap: 16px; }
   .f-copy { margin-left: 0; width: 100%; }
 
-  /* SCROLL HINT */
+  /* SCROLL HINT on mobile */
   .scroll-hint { display: none; }
 
-  /* Customize section fixes */
+  /* Customize section eyebrow fix */
   #customize .cust-left .sec-eyebrow { margin-top: 0; }
-  #customize .cust-left .cust-intro { margin-bottom: 20px !important; }
-  #pricing .sec-eyebrow { margin-bottom: 12px; }
 }
 
 @media (max-width: 480px) {
-  .hero-h1 { font-size: clamp(32px, 10vw, 50px); }
-  .hero-eyebrow { margin-bottom: 16px; }
-  .btn-dark { padding: 14px 22px; font-size: 10px; }
-  .phil-h2 { font-size: clamp(22px, 8vw, 38px); }
-  .plan-img-wrap { height: 170px; }
+  .hero-h1 { font-size: clamp(34px, 10vw, 52px); }
+  .hero-eyebrow { margin-bottom: 20px; }
+  .btn-dark { padding: 13px 24px; font-size: 10px; }
+  .phil-h2 { font-size: clamp(24px, 8vw, 40px); }
+  .plan-img-wrap { height: 160px; }
   .cust-options { gap: 6px; }
-  .cust-opt { padding: 9px 14px; font-size: 11px; }
-  .p-apt-tab { padding: 9px 12px; }
-  .plans-header { padding-top: 56px; }
-  .s-customize .cust-left { padding-top: 56px; }
-  .s-why { padding-top: 56px; }
-  .s-pricing { padding-top: 56px; }
-  .s-waitlist { padding-top: 64px; }
-  nav { height: 44px; }
-  .mobile-menu { top: 44px; }
+  .cust-opt { padding: 8px 14px; font-size: 11px; }
+  .p-apt-tab { padding: 8px 12px; }
 }
-
 
 </style>
 </head>
@@ -1260,7 +1380,7 @@ nav.dark .hamburger span{background:#fff}
 </div><!-- /slider -->
 
 <!-- FOOTER (outside slider, shown on last slide) -->
-<footer id="site-footer" style="position:fixed;bottom:0;left:0;right:0;z-index:300;padding:16px 80px;border-top:1px solid #e8e8e8;display:none;align-items:center;background:#fff;padding-bottom:max(16px,env(safe-area-inset-bottom))">
+<footer id="site-footer" style="position:fixed;bottom:0;left:0;right:0;z-index:300;padding:20px 80px;border-top:1px solid #e8e8e8;display:none;align-items:center;background:#fff;">
   <div class="f-logo">La<span>a</span>S</div>
   <ul class="f-links">
     <li><a onclick="goToSlide(1)">Concept</a></li>
@@ -1420,13 +1540,13 @@ window.addEventListener('touchend', (e) => {
   const absX = Math.abs(dx);
 
   // Horizontal swipe on pricing slide → switch apartment type
-  if (current === PRICING_SLIDE && absX > absY && absX > 36) {
+  if (current === PRICING_SLIDE && absX > absY && absX > 40) {
     if (dx > 0) { if (pricingAptIdx < PRICING_APT_COUNT - 1) switchPricingApt(pricingAptIdx + 1); }
     else        { if (pricingAptIdx > 0) switchPricingApt(pricingAptIdx - 1); }
     return;
   }
 
-  if (absY < 44) return; // too small a swipe — increased threshold for accidental taps
+  if (absY < 50) return; // too small a swipe
 
   // If swiping inside a scrollable element that still has scroll room, let it scroll
   const sp = scrollableParent(e.target);
