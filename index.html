@@ -1406,8 +1406,6 @@ const numEl = document.getElementById('section-num');
 const footer = document.getElementById('site-footer');
 const progressEl = document.getElementById('side-progress');
 
-if (window.innerWidth <= 768) return;
-
 // Build dots
 for(let i=0;i<TOTAL;i++){
   const d = document.createElement('div');
@@ -1536,6 +1534,9 @@ window.addEventListener('touchstart', (e) => {
 }, {passive: true});
 
 window.addEventListener('touchend', (e) => {
+  // Na mobile (šírka ≤ 768px) vypneme swipe navigáciu medzi slidmi
+  if (window.innerWidth <= 768) return;
+
   const dy = touchStartY - e.changedTouches[0].clientY;
   const dx = touchStartX - e.changedTouches[0].clientX;
   const absY = Math.abs(dy);
