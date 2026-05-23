@@ -1406,6 +1406,8 @@ const numEl = document.getElementById('section-num');
 const footer = document.getElementById('site-footer');
 const progressEl = document.getElementById('side-progress');
 
+if (window.innerWidth <= 768) return;
+
 // Build dots
 for(let i=0;i<TOTAL;i++){
   const d = document.createElement('div');
