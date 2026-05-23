@@ -1243,80 +1243,30 @@ nav.dark .hamburger span{background:#fff}
 
 <script>
 // ── CONFIG ──
-const TOTAL = 7; // number of slides
-const DARK_SLIDES = [1, 5]; // slides with dark background
-const labels = ['01','02','03','04','05','06','07'];
-const names  = ['Hero','Concept','Floor Plans','Customize','Why LaaS','Pricing','Waitlist'];
+const TOTAL = 7;
+const DARK_SLIDES = [1, 5];
+const names = ['Hero', 'Concept', 'Floor Plans', 'Customize', 'Why LaaS', 'Pricing', 'Waitlist'];
 
 let current = 0;
 let isAnimating = false;
 let menuOpen = false;
+
 const slider = document.getElementById('slider');
 const nav = document.getElementById('main-nav');
 const numEl = document.getElementById('section-num');
 const footer = document.getElementById('site-footer');
 const progressEl = document.getElementById('side-progress');
+const mobileMenuEl = document.getElementById('mobile-menu');
+const hambEl = document.getElementById('hamburger');
 
-// Build dots
-for(let i=0;i<TOTAL;i++){
+for (let i = 0; i < TOTAL; i++) {
   const d = document.createElement('div');
   d.className = 'prog-dot';
-  d.onclick = ()=>goToSlide(i);
+  d.onclick = () => goToSlide(i);
   d.title = names[i];
   progressEl.appendChild(d);
 }
 
-function goToSlide(idx){
-  if(idx<0||idx>=TOTAL)return;
-  current = idx;
-  // Close mobile menu if open
-  menuOpen = false;
-  const hambEl = document.getElementById('hamburger');
-  const mobileMenuEl = document.getElementById('mobile-menu');
-  if(hambEl) hambEl.classList.remove('open');
-  if(mobileMenuEl) mobileMenuEl.classList.remove('open');
-  updateUI();
-  if(window.innerWidth <= 768){
-    // Na mobile — normálny scroll k sekcii
-    const slides = document.querySelectorAll('.slide');
-    if(slides[idx]) slides[idx].scrollIntoView({ behavior: 'smooth' });
-    return;
-  }
-  if(isAnimating)return;
-  isAnimating = true;
-  slider.style.transform = `translateY(${-idx*100}vh)`;
-  setTimeout(()=>{ isAnimating=false; }, 950);
-}
-
-function updateUI(){
-  // Translate slider
-  slider.style.transform = `translateY(${-current*100}vh)`;
-
-  // Dots
-  const dots = progressEl.querySelectorAll('.prog-dot');
-  const isDark = DARK_SLIDES.includes(current);
-  dots.forEach((d,i)=>{
-    d.className = 'prog-dot' + (isDark?' dark-mode':'') + (i===current?' active':'');
-  });
-
-  // Nav
-  nav.className = isDark ? 'dark' : '';
-
-  // Section number
-  numEl.textContent = (current+1).toString().padStart(2,'0') + ' / ' + TOTAL.toString().padStart(2,'0');
-  numEl.className = isDark ? 'dark' : '';
-
-  // Footer
-  footer.style.display = current===TOTAL-1 ? 'flex' : 'none';
-
-  // Mobile menu dark sync
-  const mobileMenuEl = document.getElementById('mobile-menu');
-  if(mobileMenuEl) mobileMenuEl.classList.toggle('dark', isDark);
-  const hambEl = document.getElementById('hamburger');
-  if(hambEl) hambEl.className = 'hamburger' + (menuOpen ? ' open' : '');
-}
-
-// ── PRICING APT SWITCHER ──
 const PRICING_SLIDE = 5;
 const PRICING_APT_COUNT = 3;
 let pricingAptIdx = 0;
@@ -1324,59 +1274,122 @@ let pricingAptIdx = 0;
 function switchPricingApt(idx) {
   pricingAptIdx = idx;
   const track = document.getElementById('p-panels-track');
-  if(track) track.style.transform = `translateX(${-idx * 100}%)`;
-  document.querySelectorAll('.p-apt-tab').forEach((t,i) => t.classList.toggle('active', i===idx));
+  if (track) track.style.transform = `translateX(${-idx * 100}%)`;
+  document.querySelectorAll('.p-apt-tab').forEach((t, i) => t.classList.toggle('active', i === idx));
 }
 
-// Wire up apt tab clicks
 document.querySelectorAll('.p-apt-tab').forEach((tab, i) => {
   tab.addEventListener('click', () => switchPricingApt(i));
 });
 
-// ── WHEEL ──
+function setMenuState(open) {
+  menuOpen = open;
+  if (hambEl) hambEl.className = 'hamburger' + (menuOpen ? ' open' : '');
+  if (mobileMenuEl) mobileMenuEl.classList.toggle('open', menuOpen);
+}
+
+function goToSlide(idx) {
+  if (idx < 0 || idx >= TOTAL) return;
+  current = idx;
+  setMenuState(false);
+  updateUI();
+
+  if (window.innerWidth <= 768) {
+    const slides = document.querySelectorAll('.slide');
+    if (slides[idx]) slides[idx].scrollIntoView({ behavior: 'smooth' });
+    return;
+  }
+
+  if (isAnimating) return;
+  isAnimating = true;
+  slider.style.transform = `translateY(${-idx * 100}vh)`;
+  setTimeout(() => { isAnimating = false; }, 950);
+}
+
+function getActiveSlideIndex() {
+  const slides = [...document.querySelectorAll('.slide')];
+  const center = window.innerHeight * 0.5;
+  let bestIdx = 0;
+  let bestDist = Infinity;
+
+  slides.forEach((slide, i) => {
+    const rect = slide.getBoundingClientRect();
+    const slideCenter = rect.top + rect.height / 2;
+    const dist = Math.abs(slideCenter - center);
+    if (dist < bestDist) {
+      bestDist = dist;
+      bestIdx = i;
+    }
+  });
+
+  return bestIdx;
+}
+
+function updateUI() {
+  if (window.innerWidth > 768) {
+    slider.style.transform = `translateY(${-current * 100}vh)`;
+  }
+
+  const isDark = DARK_SLIDES.includes(current);
+  const dots = progressEl.querySelectorAll('.prog-dot');
+
+  dots.forEach((d, i) => {
+    d.className = 'prog-dot' + (isDark ? ' dark-mode' : '') + (i === current ? ' active' : '');
+  });
+
+  nav.className = isDark ? 'dark' : '';
+  numEl.textContent = `${String(current + 1).padStart(2, '0')} / ${String(TOTAL).padStart(2, '0')}`;
+  numEl.className = isDark ? 'dark' : '';
+  footer.style.display = current === TOTAL - 1 ? 'flex' : 'none';
+
+  if (mobileMenuEl) mobileMenuEl.classList.toggle('dark', isDark);
+  if (hambEl) hambEl.className = 'hamburger' + (menuOpen ? ' open' : '');
+}
+
 let wheelAccum = 0;
 let wheelTimer = null;
-window.addEventListener('wheel', (e)=>{
+
+window.addEventListener('wheel', (e) => {
   e.preventDefault();
-  if(isAnimating)return;
+  if (isAnimating) return;
+
   wheelAccum += e.deltaY;
   clearTimeout(wheelTimer);
-  wheelTimer = setTimeout(()=>{
-    if(Math.abs(wheelAccum)>30){
-      if(current === PRICING_SLIDE) {
-        if(wheelAccum > 0) {
-          if(pricingAptIdx < PRICING_APT_COUNT - 1) switchPricingApt(pricingAptIdx + 1);
+
+  wheelTimer = setTimeout(() => {
+    if (Math.abs(wheelAccum) > 30) {
+      if (current === PRICING_SLIDE) {
+        if (wheelAccum > 0) {
+          if (pricingAptIdx < PRICING_APT_COUNT - 1) switchPricingApt(pricingAptIdx + 1);
           else goToSlide(current + 1);
         } else {
-          if(pricingAptIdx > 0) switchPricingApt(pricingAptIdx - 1);
+          if (pricingAptIdx > 0) switchPricingApt(pricingAptIdx - 1);
           else goToSlide(current - 1);
         }
       } else {
-        if(wheelAccum>0) goToSlide(current+1);
-        else goToSlide(current-1);
+        if (wheelAccum > 0) goToSlide(current + 1);
+        else goToSlide(current - 1);
       }
     }
-    wheelAccum=0;
-  },60);
-}, {passive:false});
+    wheelAccum = 0;
+  }, 60);
+}, { passive: false });
 
-// ── KEYBOARD ──
-window.addEventListener('keydown',(e)=>{
-  if(e.key==='ArrowDown'||e.key==='PageDown'){
-    if(current === PRICING_SLIDE && pricingAptIdx < PRICING_APT_COUNT - 1) switchPricingApt(pricingAptIdx + 1);
-    else goToSlide(current+1);
+window.addEventListener('keydown', (e) => {
+  if (e.key === 'ArrowDown' || e.key === 'PageDown') {
+    if (current === PRICING_SLIDE && pricingAptIdx < PRICING_APT_COUNT - 1) switchPricingApt(pricingAptIdx + 1);
+    else goToSlide(current + 1);
   }
-  if(e.key==='ArrowUp'||e.key==='PageUp'){
-    if(current === PRICING_SLIDE && pricingAptIdx > 0) switchPricingApt(pricingAptIdx - 1);
-    else goToSlide(current-1);
+
+  if (e.key === 'ArrowUp' || e.key === 'PageUp') {
+    if (current === PRICING_SLIDE && pricingAptIdx > 0) switchPricingApt(pricingAptIdx - 1);
+    else goToSlide(current - 1);
   }
 });
 
-// ── TOUCH ──
 let touchStartY = 0;
 let touchStartX = 0;
 
-// Find the closest scrollable ancestor (or self)
 function scrollableParent(el) {
   while (el && el !== document.documentElement) {
     const st = getComputedStyle(el);
@@ -1389,10 +1402,9 @@ function scrollableParent(el) {
 window.addEventListener('touchstart', (e) => {
   touchStartY = e.touches[0].clientY;
   touchStartX = e.touches[0].clientX;
-}, {passive: true});
+}, { passive: true });
 
 window.addEventListener('touchend', (e) => {
-  // Na mobile (šírka ≤ 768px) vypneme swipe navigáciu medzi slidmi
   if (window.innerWidth <= 768) return;
 
   const dy = touchStartY - e.changedTouches[0].clientY;
@@ -1400,49 +1412,47 @@ window.addEventListener('touchend', (e) => {
   const absY = Math.abs(dy);
   const absX = Math.abs(dx);
 
-  // Horizontal swipe on pricing slide → switch apartment type
   if (current === PRICING_SLIDE && absX > absY && absX > 40) {
-    if (dx > 0) { if (pricingAptIdx < PRICING_APT_COUNT - 1) switchPricingApt(pricingAptIdx + 1); }
-    else        { if (pricingAptIdx > 0) switchPricingApt(pricingAptIdx - 1); }
+    if (dx > 0) {
+      if (pricingAptIdx < PRICING_APT_COUNT - 1) switchPricingApt(pricingAptIdx + 1);
+    } else {
+      if (pricingAptIdx > 0) switchPricingApt(pricingAptIdx - 1);
+    }
     return;
   }
 
-  if (absY < 50) return; // too small a swipe
+  if (absY < 50) return;
 
-  // If swiping inside a scrollable element that still has scroll room, let it scroll
   const sp = scrollableParent(e.target);
   if (sp) {
     const atBottom = sp.scrollTop + sp.clientHeight >= sp.scrollHeight - 8;
-    const atTop    = sp.scrollTop <= 8;
-    if (dy > 0 && !atBottom) return;  // content can still scroll down
-    if (dy < 0 && !atTop)   return;   // content can still scroll up
+    const atTop = sp.scrollTop <= 8;
+    if (dy > 0 && !atBottom) return;
+    if (dy < 0 && !atTop) return;
   }
 
-  // Navigate between slides
   if (dy > 0) goToSlide(current + 1);
-  else        goToSlide(current - 1);
-}, {passive: true});
+  else goToSlide(current - 1);
+}, { passive: true });
 
+window.addEventListener('scroll', () => {
+  if (window.innerWidth > 768) return;
+  current = getActiveSlideIndex();
+  updateUI();
+}, { passive: true });
 
-// ── FLOOR PLAN TABS ──
-function switchPlan(i){
-  document.querySelectorAll('.ptab').forEach((t,x)=>t.classList.toggle('on',x===i));
-  document.querySelectorAll('.ppanel').forEach((p,x)=>p.classList.toggle('on',x===i));
-}
-
-// ── WAITLIST ──
-function joinWL(){
-  var e=document.getElementById('wl-email');
-  if(e.value&&e.value.includes('@')){
-    document.getElementById('wl-form').style.display='none';
-    document.getElementById('wl-ok').style.display='block';
-  }else{
-    e.style.borderColor='#C27348';
-    setTimeout(()=>e.style.borderColor='',1500);
+window.addEventListener('resize', () => {
+  if (window.innerWidth <= 768) {
+    current = getActiveSlideIndex();
   }
+  updateUI();
+});
+
+function mobileNav(idx) {
+  setMenuState(false);
+  goToSlide(idx);
 }
 
-// Init
 updateUI();
 
 // ── HAMBURGER MENU ──
